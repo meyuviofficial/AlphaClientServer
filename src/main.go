@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -41,11 +40,6 @@ func PostServerDetails(c *gin.Context) {
 	c.BindJSON(&NewServer)
 	Status[NewServer]++
 
-	
-	// if Status == nil {
-	// 	Status = map[Server]int{NewServer: 1}
-	// }
-	// // fmt.Print(Status[NewServer], "is the value of login attempts")
 	q := url.Values{}
 	location := url.URL{Path: "/", RawQuery: q.Encode()}
 
