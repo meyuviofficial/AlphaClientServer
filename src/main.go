@@ -14,8 +14,10 @@ type Server struct {
 	IP string `json:"ip"`
 }
 
-var Status[] Server
+var Status map[Server]int
+
 func main() {
+	Status =  make(map[Server]int, 0)
 	router := gin.Default()
 	router.GET("/", ApacheServer)
 	router.POST("/SSH", PostServerDetails )
@@ -23,14 +25,27 @@ func main() {
 }
 
 func ApacheServer(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, Status)
-	fmt.Print("Hi ! I'm running inside the server")
+
+	var Response[] string
+	fmt.Print(Status)
+	for CurrentServer, LoginCount := range Status {
+		fmt.Printf("Server : %v was logged in by %v for %v number of times \n", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
+		CurrentOutput := fmt.Sprintf("Server : %v was logged in by %v for %v number of times \n", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
+		Response = append(Response, CurrentOutput)
+	}
+	c.IndentedJSON(http.StatusOK, Response)
 }
 
 func PostServerDetails(c *gin.Context) {
 	var NewServer Server
 	c.BindJSON(&NewServer)
-	Status = append(Status, NewServer)
+	Status[NewServer]++
+
+	
+	// if Status == nil {
+	// 	Status = map[Server]int{NewServer: 1}
+	// }
+	// // fmt.Print(Status[NewServer], "is the value of login attempts")
 	q := url.Values{}
 	location := url.URL{Path: "/", RawQuery: q.Encode()}
 
