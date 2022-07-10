@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM golang:1.16-alpine
+FROM golang:1.16-alpine as build
 
 WORKDIR /AlphaClientServer
 
@@ -12,6 +12,11 @@ RUN go mod download
 COPY /src/* /AlphaClientServer/
 
 RUN go build -o /main
+
+
+FROM golang:1.16-alpine
+
+COPY --from=build /main /main
 
 EXPOSE 8080
 
