@@ -39,9 +39,6 @@ func PostServerDetails(c *gin.Context) {
 	var NewServer Server
 	c.BindJSON(&NewServer)
 	Status[NewServer]++
-
-	q := url.Values{}
-	location := url.URL{Path: "/", RawQuery: q.Encode()}
-
+	location := url.URL{Path: "/"}
 	c.Redirect(http.StatusFound, location.RequestURI())
 }
