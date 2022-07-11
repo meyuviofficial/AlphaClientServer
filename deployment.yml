@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alphaclientserver
+spec:
+  replicas: 5
+  selector: 
+    matchLabels: 
+      name: alphaclientserver
+  template:
+    metadata:
+      labels:
+        name: alphaclientserver
+    spec:
+      containers:
+      - name: alphaserver
+        image: noncoder/go-repo:v0.7
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+          requests:
+            memory: 256Mi
+            cpu: "0.2"
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 8080
+            
+
