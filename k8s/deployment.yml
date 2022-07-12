@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: alphaserver
-        image: noncoder/go-repo:v0.7
+        image: noncoder/alphaserver:latest
         resources:
           limits:
             memory: 512Mi
