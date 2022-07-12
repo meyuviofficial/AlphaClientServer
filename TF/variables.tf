@@ -19,7 +19,7 @@ variable "AksName" {
 variable "AcrName" {
   type = string
   description = "ACR will be deployed with this name"
-  default = "AlphaClientServer-acr"
+  default = "AlphaClientServeracr"
 }
 
 
