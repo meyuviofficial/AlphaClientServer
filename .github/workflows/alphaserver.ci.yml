@@ -7,26 +7,25 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
+    name: Build the Go App
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-
-    - name: Set up Go
+    - name: Install and Setup the Go Environment
       uses: actions/setup-go@v3
       with:
         go-version: 1.18.x
         cache: true
         
-    - name: Install dependencies
+    - name: Install the Go dependencies
       run: |
           go mod download
-    - name: Copy the Source File
+    - name: Copy the Source Files
       run: | 
           cp ./src/* .
 
-    - name: Build
+    - name: Build the packages
       run: go build -v ./...
 
     # - name: Test
