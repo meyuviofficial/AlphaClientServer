@@ -16,6 +16,13 @@ variable "AksName" {
   default = "AlphaClientServer-aks"
 }
 
+variable "AcrName" {
+  type = string
+  description = "ACR will be deployed with this name"
+  default = "AlphaClientServer-acr"
+}
+
+
 variable "ApplicationId" {
     type = string
     description = "Application Id of the Service Principal in the Azure AD"
