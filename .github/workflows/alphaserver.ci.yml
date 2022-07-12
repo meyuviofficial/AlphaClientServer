@@ -12,8 +12,8 @@ env:
   CLUSTER_RESOURCE_GROUP: "AlphaClientServer-RG"
   REGISTRY_NAME: "alphaclientserveracr"
   APP_NAME: "AlphaClientSerrver"
-  NAMESPACE: "AlphaServerNS"
-  SECRET: "AlphaServerSecret"
+  NAMESPACE: "alphaclientserver-ns"
+  SECRET: "alphaserversecret"
 
 jobs: 
   build_go:
