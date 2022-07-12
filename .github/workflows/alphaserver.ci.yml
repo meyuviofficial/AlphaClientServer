@@ -58,7 +58,7 @@ jobs:
   deploy_tf:
     name: Deploy the Kubernetes Cluster
     runs-on: ubuntu-latest
-    # needs: [build_docker]
+    needs: [build_docker]
     steps:
       - 
         uses: actions/checkout@v3
