@@ -91,11 +91,8 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
       - 
         run: |
-          find k8s
-          ls -la
-          echo ${{ github.workspace }}
-          # docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-          # docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+          docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+          docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
         working-directory: ${{ github.workspace }}
       - 
         uses: azure/aks-set-context@v1
@@ -114,8 +111,8 @@ jobs:
       - uses: azure/k8s-deploy@v1
         with:
           manifests: |
-            ${{ github.workspace }}/k8s/deployment.yaml
-            ${{ github.workspace }}/k8s/service.yaml
+            k8s/deployment.yaml
+            k8s/service.yaml
           images: |
             ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
           imagepullsecrets: |
