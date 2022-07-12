@@ -21,10 +21,13 @@ jobs:
         
     - name: Install dependencies
       run: |
-          ls -a
+          go mod download
+    - name: Copy the Source File
+      run: | 
+          cp /src/* .
 
     - name: Build
-      run: find src
+      run: go build -o /main
 
     # - name: Test
-    #   run: go test -v ../../src/...
+    #   run: go test -v 
