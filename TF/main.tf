@@ -57,6 +57,5 @@ resource "azurerm_container_registry" "AlphaClientServer_acr" {
   resource_group_name = azurerm_resource_group.AlphaClientServer.name
   location            = azurerm_resource_group.AlphaClientServer.location
   sku                 = "Basic"
-  admin_enabled       = false
+  admin_enabled       = true
 }
-
