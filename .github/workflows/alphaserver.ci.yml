@@ -11,7 +11,7 @@ env:
   CLUSTER_NAME: "AlphaClientServer-aks"
   CLUSTER_RESOURCE_GROUP: "AlphaClientServer-RG"
   REGISTRY_NAME: "alphaclientserveracr"
-  APP_NAME: "AlphaClientSerrver"
+  APP_NAME: "alphaclientserver"
   NAMESPACE: "alphaclientserver-ns"
   SECRET: "alphaserversecret"
 
