@@ -91,13 +91,12 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
       - 
         run: |
-          cd ${{ github.workspace }}
           find k8s
+          ls -la
+          echo ${{ github.workspace }}
           # docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
           # docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-          # echo ${{ github.workspace }}
-          # ls -la
-        working-directory: .
+        working-directory: ${{ github.workspace }}
       - 
         uses: azure/aks-set-context@v1
         with:
