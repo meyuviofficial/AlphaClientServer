@@ -24,7 +24,7 @@ jobs:
           go mod download
     - name: Copy the Source File
       run: | 
-          cp /src/* .
+          cp ./src/* .
 
     - name: Build
       run: go build -o /main
