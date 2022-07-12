@@ -93,6 +93,8 @@ jobs:
         run: |
           docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
           docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
+          echo ${{ github.workspace }}
+          ls -la
         working-directory: .
       - 
         uses: azure/aks-set-context@v1
@@ -100,9 +102,6 @@ jobs:
           creds: '${{ secrets.CREDENTIALS }}'
           cluster-name: ${{ env.CLUSTER_NAME }}
           resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
-        run: |
-            echo ${{ github.workspace }}
-            ls -la
 
       - uses: azure/k8s-create-secret@v1
         with:
