@@ -29,3 +29,25 @@ variable "ClientSecret" {
     sensitive = true
     default = "mk98Q~8LT6WRPnXuj7LGZ8IsChybxId8T_HCqcHe"
 }
+
+variable TF_TOKEN_app_terraform_io {
+    type = string
+}
+
+variable ARM_CLIENT_ID {
+    type = string
+}
+
+variable ARM_CLIENT_SECRET {
+    type = string
+
+}
+
+variable ARM_TENANT_ID {
+    type = string
+}
+
+variable ARM_SUBSCRIPTION_ID {
+    type = string
+
+}
