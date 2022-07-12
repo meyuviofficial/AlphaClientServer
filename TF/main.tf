@@ -1,8 +1,8 @@
 terraform {
   required_providers {
-    aws = {
-      version = ">=1.2"
-      source  = "hashicorp/aws"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
     }
   }
 }
@@ -11,34 +11,30 @@ terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
     organization = "NonCoder"
-	  token = "GWzAAi0SxtOzJQ.atlasv1.ceiiZVagysMFoPqWNzCPH2Fhj8c6kxIeZztNwc0euOrlLUUshROySqzk8vj80u6uLzg"
-	
+
     workspaces {
       name = "AlphaClientServer"
     }
   }
 }
 
-resource "random_pet" "prefix" {}
-
 provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "default" {
-  name     = "${random_pet.prefix.id}-rg"
-  location = "West US 2"
-
+resource "azurerm_resource_group" "AlphaClientServer" {
+  name     = var.ResourceGroup
+  location = var.Location
   tags = {
-    environment = "Demo"
+    Project = "AlphaClientServer"
   }
 }
 
-resource "azurerm_kubernetes_cluster" "default" {
-  name                = "${random_pet.prefix.id}-aks"
-  location            = azurerm_resource_group.default.location
-  resource_group_name = azurerm_resource_group.default.name
-  dns_prefix          = "${random_pet.prefix.id}-k8s"
+resource "azurerm_kubernetes_cluster" "AlphaClientServer_aks" {
+  name                = var.AksName
+  location            = azurerm_resource_group.AlphaClientServer.location
+  resource_group_name = azurerm_resource_group.AlphaClientServer.name
+  dns_prefix          = "${var.AksName}-DNS-k8s"
 
   default_node_pool {
     name            = "default"
@@ -48,15 +44,10 @@ resource "azurerm_kubernetes_cluster" "default" {
   }
 
   service_principal {
-    client_id     = var.appId
-    client_secret = var.password
+    client_id     = var.ApplicationId
+    client_secret = var.ClientSecret
   }
-
-  role_based_access_control {
-    enabled = true
-  }
-
   tags = {
-    environment = "Demo"
+    Project = "AlphaClientServer"
   }
 }
