@@ -89,7 +89,7 @@ jobs:
           terraform_wrapper: false
       - 
         name: Terraform Plan and Apply
-        run: 
+        run: |
           cd ./TF
           terraform init
           terraform plan
