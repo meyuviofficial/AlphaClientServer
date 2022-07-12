@@ -30,9 +30,15 @@ func ApacheServer(c *gin.Context) {
 	for CurrentServer, LoginCount := range Status {
 		fmt.Printf("Server : %v was logged in by %v for %v number of times \n", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
 		CurrentOutput := fmt.Sprintf("Server : %v was logged in by %v for %v number of times \n", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
-		Response = append(Response, CurrentOutput)
+		Response = append(Response, string(CurrentOutput))
 	}
-	c.IndentedJSON(http.StatusOK, Response)
+	
+	if Response != nil {
+		c.IndentedJSON(http.StatusOK, Response)
+	} else {
+		// Response = append(Response, "OOPS !! No Data yet. Please SSH into some machines to get the data")
+		c.IndentedJSON(http.StatusOK, "OOPS !! No Data yet. Please SSH into some machines to get the data")
+	}
 }
 
 func PostServerDetails(c *gin.Context) {
