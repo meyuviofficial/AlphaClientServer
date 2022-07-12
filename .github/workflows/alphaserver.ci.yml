@@ -110,8 +110,8 @@ jobs:
       - uses: azure/k8s-deploy@v1
         with:
           manifests: |
-            ${{ github.workspace }}/k8s/deployment.yaml
-            ${{ github.workspace }}/k8s/service.yaml
+            ./k8s/deployment.yaml
+            ./k8s/service.yaml
           images: |
             ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
           imagepullsecrets: |
