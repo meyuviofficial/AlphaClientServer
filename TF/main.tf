@@ -58,11 +58,6 @@ resource "azurerm_container_registry" "AlphaClientServer_acr" {
   location            = azurerm_resource_group.AlphaClientServer.location
   sku                 = "Basic"
   admin_enabled       = false
-  georeplications {
-    location                = "East US"
-    zone_redundancy_enabled = true
-    tags                    = {}
-  }
 }
 
 resource "azurerm_role_assignment" "AlphaClientServer-RoleAssignment" {
