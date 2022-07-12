@@ -2,56 +2,46 @@ name: AlphaClientServer.CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build_go:
     name: Build the Go App
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Install and Setup the Go Environment
-      uses: actions/setup-go@v3
-      with:
-        go-version: 1.18.x
-        cache: true
-        
-    - name: Install the Go dependencies
-      run: |
+      - uses: actions/checkout@v3
+      - name: Install and Setup the Go Environment
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18.x
+          cache: true
+
+      - name: Install the Go dependencies
+        run: |
           go mod download
-    - name: Copy the Source Files
-      run: | 
+      - name: Copy the Source Files
+        run: |
           cp ./src/* .
 
-    - name: Build the packages
-      run: go build -v ./...
+      - name: Build the packages
+        run: go build -v ./...
 
-    # - name: Test
-    #   run: go test -v 
   build_tf:
     name: Build the Terraform Configuration Files
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Install and Setup the Terraform Environment
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_version: 1.2.4
-        cli_config_credentials_token: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
-        terraform_wrapper: false
-        
-    - name: Terraform Init and Validate
-      run: |
+      - uses: actions/checkout@v3
+      - name: Install and Setup the Terraform Environment
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.2.4
+          cli_config_credentials_token: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
+          terraform_wrapper: false
+
+      - name: Terraform Init and Validate
+        run: |
           cd ./TF
           terraform init
           terraform validate
-    #   continue-on-error: true
-
-    # - name: Terraform Init
-    #   id: init
-
-    # - name: Terraform Validate
-    #   id: validate
-    #   run: terraform validate -no-color
