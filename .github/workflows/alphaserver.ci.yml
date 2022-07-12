@@ -47,7 +47,8 @@ jobs:
           terraform validate
 
   build_docker:
-    name: Build the Go App
+    name: Build and Push the Docker Image
+    needs: [build_go, build_tf]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
