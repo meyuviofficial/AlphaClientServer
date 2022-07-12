@@ -8,6 +8,8 @@ on:
 
 env:
   TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO}}
+  CLUSTER_NAME: "AlphaClientServer-aks"
+  CLUSTER_RESOURCE_GROUP: "AlphaClientServer-RG"
 
 jobs: 
   build_go:
@@ -69,7 +71,7 @@ jobs:
           terraform init
           terraform plan
           terraform apply --auto-approve
-          
+
   build_docker:
     name: Build and Push the Docker Image
     needs: [build_go, build_tf]
@@ -96,6 +98,11 @@ jobs:
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/alphaserver:latest
           cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/alphaserver:buildcache
           cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/alphaserver:buildcache,mode=max
+      - uses: azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.CREDENTIALS }}'
+          cluster-name: ${{ env.CLUSTER_NAME }}
+          resource-group: ${{ env.CLUSTER_RESOURCE_GROUP }}
       - 
         uses: azure/k8s-deploy@v1
         with:
@@ -104,8 +111,6 @@ jobs:
             ${{ github.workspace }}/k8s/service.yml
           images: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/alphaserver:latest
-          imagepullsecrets: |
-            ${{ env.SECRET }}
           namespace: AlphaClientServer-aks
   
   # deploy_kube:
