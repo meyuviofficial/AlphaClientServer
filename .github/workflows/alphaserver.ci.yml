@@ -50,6 +50,7 @@ jobs:
           cd ./TF
           terraform init
           terraform validate
+  
   deploy_tf:
     name: Deploy the Kubernetes Cluster
     runs-on: ubuntu-latest
@@ -111,7 +112,7 @@ jobs:
             ${{ github.workspace }}/k8s/service.yml
           images: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/alphaserver:latest
-          namespace: AlphaClientServer-aks
+          namespace: ${{ env.CLUSTER_NAME }}
   
   # deploy_kube:
   #   name: Deploy the manifest to the Kubernetes
