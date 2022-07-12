@@ -1,0 +1,26 @@
+name: AlphaClientServer.CI
+
+on:
+  push:
+    branches: [ $default-branch ]
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install and Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.18.x'
+          cache: true
+          cache-dependency-path: ../go.sum
+      - name: Install dependencies
+        run: go get .
+      - name: Build
+        run: go build -v ../src/...
+      - name: Test with the Go CLI
+        run: go test
