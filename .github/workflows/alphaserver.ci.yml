@@ -34,6 +34,7 @@ jobs:
     name: Build the Terraform Configuration Files
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Install and Setup the Terraform Environment
       uses: hashicorp/setup-terraform@v2
       with:
