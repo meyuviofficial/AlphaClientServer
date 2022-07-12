@@ -91,6 +91,7 @@ jobs:
           password: ${{ secrets.ACR_PASSWORD }}
       - 
         run: |
+          cd ${{ github.workspace }}
           find k8s
           # docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
           # docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
