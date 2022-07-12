@@ -10,7 +10,7 @@ env:
   TF_TOKEN_app_terraform_io: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO}}
   CLUSTER_NAME: "AlphaClientServer-aks"
   CLUSTER_RESOURCE_GROUP: "AlphaClientServer-RG"
-  REGISTRY_NAME: "AlphaClientServeracr"
+  REGISTRY_NAME: "alphaclientserveracr"
   APP_NAME: "AlphaClientSerrver"
   NAMESPACE: "AlphaServerNS"
   SECRET: "AlphaServerSecret"
