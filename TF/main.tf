@@ -8,9 +8,11 @@ terraform {
 }
 
 terraform {
-  cloud {
+  backend "remote" {
+    hostname     = "app.terraform.io"
     organization = "NonCoder"
-    
+	  token = "GWzAAi0SxtOzJQ.atlasv1.ceiiZVagysMFoPqWNzCPH2Fhj8c6kxIeZztNwc0euOrlLUUshROySqzk8vj80u6uLzg"
+	
     workspaces {
       name = "AlphaClientServer"
     }
