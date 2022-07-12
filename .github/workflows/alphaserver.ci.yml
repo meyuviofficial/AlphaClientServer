@@ -21,10 +21,10 @@ jobs:
         
     - name: Install dependencies
       run: |
-          go mod download
+          ls -a
 
     - name: Build
-      run: go build -v ../../src/...
+      run: find src
 
-    - name: Test
-      run: go test -v ../../src/...
+    # - name: Test
+    #   run: go test -v ../../src/...
