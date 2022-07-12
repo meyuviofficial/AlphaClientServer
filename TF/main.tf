@@ -60,9 +60,3 @@ resource "azurerm_container_registry" "AlphaClientServer_acr" {
   admin_enabled       = false
 }
 
-resource "azurerm_role_assignment" "AlphaClientServer-RoleAssignment" {
-  principal_id                     = azurerm_kubernetes_cluster.AlphaClientServer_aks.kubelet_identity[0].object_id
-  role_definition_name             = "AcrPull"
-  scope                            = azurerm_container_registry.AlphaClientServer_acr.id
-  skip_service_principal_aad_check = true
-}
