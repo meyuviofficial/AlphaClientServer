@@ -80,3 +80,7 @@ variable "Password" {
   type = string
   sensitive = true
 }
+
+variable "NodeCount" {
+  type = int
+}

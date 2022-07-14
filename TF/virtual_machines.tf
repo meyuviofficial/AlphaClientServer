@@ -1,5 +1,5 @@
 locals {
-  count = 3
+  count = var.NodeCount
 }
 resource "azurerm_virtual_network" "AlphaClientVNET" {
   name                = var.VirtualNetwork
