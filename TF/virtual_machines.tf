@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "AlphaClientVNET" {
 
 resource "azurerm_subnet" "AlphaClientSubnet" {
   name                 = var.Subnet
-  resource_group_name  = azurerm_resource_group.AlphaClientServer.location
+  resource_group_name  = azurerm_resource_group.AlphaClientServer.name
   virtual_network_name = azurerm_virtual_network.AlphaClientVNET.name
   address_prefixes     = ["10.0.2.0/24"]
 }
