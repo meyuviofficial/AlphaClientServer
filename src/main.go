@@ -18,12 +18,12 @@ var Status map[Server]int
 func main() {
 	Status =  make(map[Server]int, 0)
 	router := gin.Default()
-	router.GET("/", ApacheServer)
+	router.GET("/", AlphaServer)
 	router.POST("/SSH", PostServerDetails )
 	router.Run(":8080")
 }
 
-func ApacheServer(c *gin.Context) {
+func AlphaServer(c *gin.Context) {
 
 	var Response[] string
 	fmt.Print(Status)
