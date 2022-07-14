@@ -5,7 +5,7 @@ import (
 )
 
 type Server struct {
-	User       string `json:"person" binding:"required"`
+	User       string `json:"user" binding:"required"`
 	ServerName string `json:"servername" binding:"required"`
 	Ip         string `json:"ip" binding:"required"`
 }
