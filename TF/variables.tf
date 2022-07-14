@@ -71,6 +71,11 @@ variable "VirtualMachineName" {
   description = "VirtualMachine will be deployed with this name"
 }
 
+variable "NetworkSecurityGroup" {
+  type        = string
+  default     = "AlphaClient-NSG"
+  description = "VirtualMachine will be connected via this NSG"
+}
 variable "Admin" {
   type      = string
   sensitive = true

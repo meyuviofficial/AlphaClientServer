@@ -61,3 +61,26 @@ resource "azurerm_virtual_machine" "AlphaClient" {
     disable_password_authentication = false
   }
 }
+
+resource "azurerm_network_security_group" "VirtualMachineNSG" {
+  name                = var.NetworkSecurityGroup
+  location            = azurerm_resource_group.AlphaClientServer.location
+  resource_group_name = azurerm_resource_group.AlphaClientServer.name
+
+  security_rule {
+    name                       = "Allow_Port-8080"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = 80
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "AlphaClient-NSG-SUBNET-Association" {
+  subnet_id                 = azurerm_subnet.AlphaClientSubnet.id
+  network_security_group_id = azurerm_network_security_group.VirtualMachineNSG.id
+}
