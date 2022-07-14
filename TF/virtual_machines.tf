@@ -36,7 +36,7 @@ resource "azurerm_virtual_machine" "AlphaClient" {
   network_interface_ids = [element(azurerm_network_interface.VirtualMachineNIC.*.id, count.index)]
   vm_size               = "Standard_DS1_v2"
 
-  delete_os_disk_on_termination = true 
+  delete_os_disk_on_termination = true
 
   delete_data_disks_on_termination = true
 
@@ -50,7 +50,7 @@ resource "azurerm_virtual_machine" "AlphaClient" {
     name              = "OsDisk-${count.index}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"  
+    managed_disk_type = "Standard_LRS"
   }
   os_profile {
     computer_name  = var.VirtualMachineName
