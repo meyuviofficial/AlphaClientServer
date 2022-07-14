@@ -28,12 +28,9 @@ func main() {
 func AlphaServer(c *gin.Context) {
 
 	var Response bytes.Buffer
-	// fmt.Print(Status)
 	for CurrentServer, LoginCount := range Status {
-		// fmt.Printf("Server : %v was logged in by %v for %v number of times", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
 		CurrentOutput := fmt.Sprintf("Server : %v was logged in by %v for %v number of times\n", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
 		Response.WriteString(CurrentOutput)
-		// Response.WriteString("</br>")
 	}
 	
 	if Response.String() != "" {
@@ -53,5 +50,6 @@ func PostServerDetails(c *gin.Context) {
     }
 	
 	Status[NewServer]++
-	c.Redirect(http.StatusFound, (url.URL{Path: "/"}).RequestURI())
+	location := url.URL{Path: "/"}
+	c.Redirect(http.StatusFound, location.RequestURI())
 }
