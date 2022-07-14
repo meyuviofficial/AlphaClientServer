@@ -25,6 +25,7 @@ resource "azurerm_network_interface" "VirtualMachineNIC" {
     name                          = "VirtualMachine-Config"
     subnet_id                     = azurerm_subnet.AlphaClientSubnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = element(azurerm_public_ip.VirtualMachine-Public-Ip.*.id, count.index)
   }
 }
 
@@ -83,4 +84,16 @@ resource "azurerm_network_security_group" "VirtualMachineNSG" {
 resource "azurerm_subnet_network_security_group_association" "AlphaClient-NSG-SUBNET-Association" {
   subnet_id                 = azurerm_subnet.AlphaClientSubnet.id
   network_security_group_id = azurerm_network_security_group.VirtualMachineNSG.id
+}
+
+resource "azurerm_public_ip" "VirtualMachine-Public-Ip" {
+  count               = local.count
+  name                = "${var.VirtualMachineName}-Ip-${count.index}"
+  resource_group_name = azurerm_resource_group.AlphaClientServer.name
+  location            = azurerm_resource_group.AlphaClientServer.location
+  allocation_method   = "Static"
+
+  tags = {
+    environment = "Production"
+  }
 }
