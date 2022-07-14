@@ -82,5 +82,5 @@ variable "Password" {
 }
 
 variable "NodeCount" {
-  type = int
+  type = number
 }
