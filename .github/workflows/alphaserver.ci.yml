@@ -35,6 +35,9 @@ jobs:
 
       - name: Build the packages
         run: go build -v ./...
+      
+      - name: Test the packages
+        run: go test -v ./...
 
   build_tf:
     name: Build the Terraform Configuration Files
