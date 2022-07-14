@@ -3,25 +3,24 @@ package main
 import (
 	"bytes"
 	"fmt"
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"net/url"
-
-	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
-	PERSON string `json:"person"`
-	NAME string `json:"name"`
-	IP string `json:"ip"`
+	User       string `json:"person" binding:"required"`
+	ServerName string `json:"servername" binding:"required"`
+	Ip         string `json:"ip" binding:"required"`
 }
 
 var Status map[Server]int = make(map[Server]int, 0)
 
 func main() {
-	Status =  make(map[Server]int, 0)
+	Status = make(map[Server]int, 0)
 	router := gin.Default()
 	router.GET("/", AlphaServer)
-	router.POST("/SSH", PostServerDetails )
+	router.POST("/SSH", PostServerDetails)
 	router.Run(":8080")
 }
 
@@ -29,10 +28,10 @@ func AlphaServer(c *gin.Context) {
 
 	var Response bytes.Buffer
 	for CurrentServer, LoginCount := range Status {
-		CurrentOutput := fmt.Sprintf("Server : %v was logged in by %v for %v number of times\n", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
+		CurrentOutput := fmt.Sprintf("Server : %v was logged in by %v for %v number of times\n", CurrentServer.ServerName, CurrentServer.User, LoginCount)
 		Response.WriteString(CurrentOutput)
 	}
-	
+
 	if Response.String() != "" {
 		c.String(http.StatusAccepted, Response.String())
 	} else {
@@ -44,12 +43,12 @@ func AlphaServer(c *gin.Context) {
 func PostServerDetails(c *gin.Context) {
 	var NewServer Server
 
-	if err := c.ShouldBindJSON(&NewServer); err != nil {
-        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-        return
-    }
-	
-	Status[NewServer]++
-	location := url.URL{Path: "/"}
-	c.Redirect(http.StatusFound, location.RequestURI())
+	if err := c.ShouldBindJSON(&NewServer); err == nil {
+		fmt.Printf("Valid Body")
+		Status[NewServer]++
+		location := url.URL{Path: "/"}
+		c.Redirect(http.StatusFound, location.RequestURI())
+	} else {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
 }
