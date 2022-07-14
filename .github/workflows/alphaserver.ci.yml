@@ -58,7 +58,7 @@ jobs:
           terraform validate
   
   deploy_tf:
-    name: Deploy the Kubernetes Cluster
+    name: Deploy the required Infrastructures
     runs-on: ubuntu-latest
     needs: [build_tf, build_go]
     steps:
