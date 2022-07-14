@@ -53,5 +53,5 @@ func PostServerDetails(c *gin.Context) {
     }
 	
 	Status[NewServer]++
-	c.Redirect(http.StatusFound, url.URL{Path: "/"}.RequestURI())
+	c.Redirect(http.StatusFound, (url.URL{Path: "/"}).RequestURI())
 }
