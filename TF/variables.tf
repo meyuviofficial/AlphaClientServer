@@ -43,7 +43,6 @@ variable ARM_CLIENT_ID {
 
 variable ARM_CLIENT_SECRET {
     type = string
-
 }
 
 variable ARM_TENANT_ID {
@@ -52,5 +51,32 @@ variable ARM_TENANT_ID {
 
 variable ARM_SUBSCRIPTION_ID {
     type = string
+}
 
+variable "VirtualNetwork" {
+  type = string
+  default = "AlphaClientVNET"
+  description = "This Virtual Network will be used for the Virtual Machine"
+}
+
+variable "Subnet" {
+  type = string
+  default = "AlphaClientSubnet"
+  description = "The deployed client (VM) will be connected to this subnet"
+}
+
+variable "VirtualMachineName" {
+  type = string
+  default = "AlphaClient"
+  description = "VirtualMachine will be deployed with this name"
+}
+
+variable "Admin" {
+  type = string
+  sensitive = true
+}
+
+variable "Password" {
+  type = string
+  sensitive = true
 }
