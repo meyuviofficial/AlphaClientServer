@@ -28,10 +28,6 @@ func main() {
 func AlphaServer(c *gin.Context) {
 
 	var Response bytes.Buffer
-	header := c.Writer.Header()
-	header["Content-Type"] = []string{"text/plain"}
-	c.Writer.WriteHeaderNow()
-
 	// fmt.Print(Status)
 	for CurrentServer, LoginCount := range Status {
 		// fmt.Printf("Server : %v was logged in by %v for %v number of times", CurrentServer.NAME, CurrentServer.PERSON, LoginCount)
@@ -50,8 +46,12 @@ func AlphaServer(c *gin.Context) {
 
 func PostServerDetails(c *gin.Context) {
 	var NewServer Server
-	c.BindJSON(&NewServer)
+
+	if err := c.ShouldBindJSON(&NewServer); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+	
 	Status[NewServer]++
-	location := url.URL{Path: "/"}
-	c.Redirect(http.StatusFound, location.RequestURI())
+	c.Redirect(http.StatusFound, url.URL{Path: "/"}.RequestURI())
 }
