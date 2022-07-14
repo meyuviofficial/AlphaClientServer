@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: alphaserver
-        image: noncoder/alphaserver:latest
+        image: alphaclientserveracr.azurecr.io/alphaclientserver:latest
         resources:
           limits:
             memory: 512Mi
