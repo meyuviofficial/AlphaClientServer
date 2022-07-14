@@ -4,16 +4,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Server struct {
-	User       string `json:"user" binding:"required"`
-	ServerName string `json:"servername" binding:"required"`
-	Ip         string `json:"ip" binding:"required"`
+type server struct {
+	User        string `json:"user" binding:"required"`
+	Server_Name string `json:"servername" binding:"required"`
+	Ip          string `json:"ip" binding:"required"`
 }
 
-var Status map[Server]int = make(map[Server]int, 0)
+var status map[server]int = make(map[server]int, 0)
 
 func main() {
-	Status = make(map[Server]int, 0)
+	status = make(map[server]int, 0)
 	router := gin.Default()
 	router.GET("/", AlphaServer)
 	router.POST("/SSH", PostServerDetails)

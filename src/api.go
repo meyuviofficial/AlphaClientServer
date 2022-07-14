@@ -10,26 +10,26 @@ import (
 
 func AlphaServer(c *gin.Context) {
 
-	var Response bytes.Buffer
-	for CurrentServer, LoginCount := range Status {
-		CurrentOutput := fmt.Sprintf("Server : %v was logged in by %v for %v number of times\n", CurrentServer.ServerName, CurrentServer.User, LoginCount)
-		Response.WriteString(CurrentOutput)
+	var response bytes.Buffer
+	for current_server, login_count := range status {
+		current_output := fmt.Sprintf("Server : %v was logged in by %v for %v number of times\n", current_server.Server_Name, current_server.User, login_count)
+		response.WriteString(current_output)
 	}
 
-	if Response.String() != "" {
-		c.String(http.StatusAccepted, Response.String())
+	if response.String() != "" {
+		c.String(http.StatusAccepted, response.String())
 	} else {
-		// Response = append(Response, "OOPS !! No Data yet. Please SSH into some machines to get the data")
+		// response = append(response, "OOPS !! No Data yet. Please SSH into some machines to get the data")
 		c.String(http.StatusOK, "OOPS !! No Data yet. Please SSH into some machines to get the data")
 	}
 }
 
 func PostServerDetails(c *gin.Context) {
-	var NewServer Server
+	var new_server server
 
-	if err := c.ShouldBindJSON(&NewServer); err == nil {
+	if err := c.ShouldBindJSON(&new_server); err == nil {
 		fmt.Printf("Valid Body")
-		Status[NewServer]++
+		status[new_server]++
 		location := url.URL{Path: "/"}
 		c.Redirect(http.StatusFound, location.RequestURI())
 	} else {

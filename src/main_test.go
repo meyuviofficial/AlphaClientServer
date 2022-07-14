@@ -32,10 +32,10 @@ func TestPostMethod(t *testing.T) {
 	r := SetUpRouter()
 	r.POST("/SSH", PostServerDetails)
 
-	newServer := Server{
-		User:       "Person A",
-		ServerName: "Server A",
-		Ip:         "192.168.0.1",
+	newServer := server{
+		User:        "Person A",
+		Server_Name: "Server A",
+		Ip:          "192.168.0.1",
 	}
 
 	jsonBody, _ := json.Marshal(newServer)
