@@ -13,10 +13,10 @@ type Server struct {
 	IP string `json:"ip"`
 }
 
-var Status map[Server]int
+var Status map[Server]int = make(map[Server]int, 0)
 
 func main() {
-	Status =  make(map[Server]int, 0)
+	// Status =  make(map[Server]int, 0)
 	router := gin.Default()
 	router.GET("/", AlphaServer)
 	router.POST("/SSH", PostServerDetails )
