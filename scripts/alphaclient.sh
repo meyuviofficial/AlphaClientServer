@@ -14,9 +14,9 @@ EOF
 )
 
 
-    curl http://20.253.162.142/SSH \
-        -v -i -L\
-        -X POST \
-        -H "Accept: application/json" \
-        -H "Content-Type:application/json" \
-        -d "$body"
+curl http://20.253.162.142/SSH \
+    -v -i -L\
+    -X POST \
+    -H "Accept: application/json" \
+    -H "Content-Type:application/json" \
+    -d "$body"
