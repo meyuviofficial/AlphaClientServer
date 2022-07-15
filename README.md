@@ -27,7 +27,7 @@ This project involves various key components in the tech stack and if we unload 
 
 ## Architecture
 
-The High Level Design and the Architecture are shown as a diagram here. 
+The High Level Design and the Architecture are shown as a diagram here.
 
 ![ClientServerArchitecture](./public/Architecture.jpg)
 
@@ -35,7 +35,7 @@ The High Level Design and the Architecture are shown as a diagram here.
 
 ### How does the Alpha Client work?
 
-The whole automation works with the help of .bashrc file that is located for every user. 
+The whole automation works with the help of .bashrc file that is located for every user.
 Whenever a user logins interactively through the SSH, the ".bashrc" file will be called as a first step. Hence, this automation is embedded into that file and will be called during every SSH Login.
 
 ```bash
@@ -71,7 +71,7 @@ Due to the simplicity of this project, it is been configured with _continuos dep
 
 ### How to configure the Alpha Client?
 
-Alpha Server is a REST API and can be triggered either via tool like Postman or the browser. The Virtual Machines or nodes won't have these capabilities and so, we have to achieve it via scripting. 
+Alpha Server is a REST API and can be triggered either via tool like Postman or the browser. The Virtual Machines or nodes won't have these capabilities and so, we have to achieve it via scripting.
 
 ---
 Alpha Client.sh
