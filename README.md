@@ -29,12 +29,11 @@ This project involves various key components in the tech stack and if we unload 
 
 The High Level Design and the Architecture are shown as a diagram here. 
 
-
 ![ClientServerArchitecture](./public/Architecture.jpg)
 
-# Working
+## Working
 
-## How does the Alpha Client work? 
+### How does the Alpha Client work?
 
 The whole automation works with the help of .bashrc file that is located for every user. 
 Whenever a user logins interactively through the SSH, the ".bashrc" file will be called as a first step. Hence, this automation is embedded into that file and will be called during every SSH Login.
@@ -48,11 +47,11 @@ curl http://20.253.162.142/SSH \
     -d "$body"
 ```
 
-## How does the Alpha Server work? 
+### How does the Alpha Server work?
 
 The main server is nothing but a simple REST Api developed using Go GIN framework. This API will capture the metrics sent to it from various nodes and displays it in the "homepage".
 
-The below page shows the empty records before any SSH login has happened. 
+The below page shows the empty records before any SSH login has happened.
 
 ![AlphaServerHomepage](.\public\InitialPageWithoutLogin.png)
 
@@ -66,11 +65,11 @@ Finally, we'll try to go to the source server to check the metrics.
 
 ## Triggers
 
-### How to Trigger the CI/CD deployment? 
+### How to Trigger the CI/CD deployment?
 
-Due to the simplicity of this project, it is been configured with _continuos deployment_ instead of _continuos delivery_  Whenever you push any code to the main branch or if any pull requests are created, then the pipeline will be triggered. 
+Due to the simplicity of this project, it is been configured with _continuos deployment_ instead of _continuos delivery_. Whenever you push any code to the main branch or if any pull requests are created, then the pipeline will be triggered.
 
-## How to configure the Alpha Client?
+### How to configure the Alpha Client?
 
 Alpha Server is a REST API and can be triggered either via tool like Postman or the browser. The Virtual Machines or nodes won't have these capabilities and so, we have to achieve it via scripting. 
 
@@ -104,7 +103,7 @@ curl http://20.253.162.142/SSH \
 ```
 
 - Copy the above mentioned script and save it as "alphaclient.sh" in any user directory.
-- Open the bashrc file with the help of the below command as a sudo user. 
+- Open the bashrc file with the help of the below command as a sudo user.
 
 ```bash
 sudo vi ~\.bashrc 
@@ -116,8 +115,8 @@ sudo vi ~\.bashrc
 source /path/to/alphaclient.sh
 ```
 
-# Conclusion
+## Conclusion
 
-## My take on this.
+### My take on this
 
-> Being a Site Reliability Engineer for almost three years, I couldn't get an opportunity to work on containerization and container orchestration. As a part of this exercise, I really learnt a lot and enjoyed the whole process. Kubernetes and Docker are very powerful tools and helps in establishing the true flavour of "DevOps" operating model with frequent deployments and zero downtime. 
+> Being a Site Reliability Engineer for almost three years, I couldn't get an opportunity to work on containerization and container orchestration. As a part of this exercise, I really learnt a lot and enjoyed the whole process. Kubernetes and Docker are very powerful tools and helps in establishing the true flavour of "DevOps" operating model with frequent deployments and zero downtime.
