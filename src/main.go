@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// Defining the Model here.
 type server struct {
 	User        string `json:"user" binding:"required"`
 	Server_Name string `json:"servername" binding:"required"`
@@ -12,6 +13,7 @@ type server struct {
 
 var status map[server]int = make(map[server]int, 0)
 
+// Defining the main server using go gin
 func main() {
 	status = make(map[server]int, 0)
 	router := gin.Default()

@@ -8,6 +8,7 @@ import (
 	"net/url"
 )
 
+// Defining the route handler for the default homepage
 func AlphaServer(c *gin.Context) {
 
 	var response bytes.Buffer
@@ -24,6 +25,7 @@ func AlphaServer(c *gin.Context) {
 	}
 }
 
+// Defining the default handler for POST method
 func PostServerDetails(c *gin.Context) {
 	var new_server server
 
