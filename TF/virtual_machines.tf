@@ -1,4 +1,5 @@
 locals {
+  # This variable will decide the number of instances to be deployed
   count = var.NodeCount
 }
 resource "azurerm_virtual_network" "AlphaClientVNET" {

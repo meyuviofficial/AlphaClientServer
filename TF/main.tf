@@ -1,3 +1,4 @@
+# Defining the Terraform Providers
 terraform {
   required_providers {
     azurerm = {
@@ -7,6 +8,7 @@ terraform {
   }
 }
 
+# Establishing the Backend connectivity to TF Cloud
 terraform {
   backend "remote" {
     hostname     = "app.terraform.io"
