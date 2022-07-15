@@ -53,15 +53,15 @@ The main server is nothing but a simple REST Api developed using Go GIN framewor
 
 The below page shows the empty records before any SSH login has happened.
 
-![AlphaServerHomepage](.\public\InitialPageWithoutLogin.png)
+![AlphaServerHomepage](./public/InitialPageWithoutLogin.png)
 
 Now, we'll try to login and we'll check back the server again.
 
-![SSH_Login](.\public\SSH_Login.png)
+![SSH_Login](./public/SSH_Login.png)
 
 Finally, we'll try to go to the source server to check the metrics.
 
-![Server_metric](.\public\Server_metric.png)
+![Server_metric](./public/Server_metric.png)
 
 ## Triggers
 
