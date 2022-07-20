@@ -27,14 +27,12 @@ variable "ApplicationId" {
   type        = string
   description = "Application Id of the Service Principal in the Azure AD"
   sensitive   = true
-  default     = "428cdc0f-a86e-46e0-92bc-acc9045a9aad"
 }
 
 variable "ClientSecret" {
   type        = string
   description = "Client Secret of the Service Principal in the Azure AD"
   sensitive   = true
-  default     = "mk98Q~8LT6WRPnXuj7LGZ8IsChybxId8T_HCqcHe"
 }
 
 variable "ARM_CLIENT_ID" {
